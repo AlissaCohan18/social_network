@@ -11,8 +11,22 @@ const thoughtController = {
       });
   },
 
-  //TODO: get a single thought by ID (GET /api/thoughts/:ID)
-//getSingleThought({})
+  //Get a single thought by ID (GET /api/thoughts/:ID)
+getSingleThought({ params }, res) {
+  Thought.findOne({ _id: params.thoughtId })
+    .then((dbData) => {
+      // If no Thought is found, send 404
+      if (!dbData) {
+        res.status(404).json({ message: "No Thought found with this id!" });
+        return;
+      }
+      res.json(dbData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).json(err);
+    });
+},
 
   //create Thought   (POST /api/thoughts)
   //TODO:  (don't forget to push the created thought's _id to the associated user's thoughts array field)
@@ -22,10 +36,24 @@ const thoughtController = {
       .catch((err) => res.status(400).json(err));
   },
 
-  //TODO: update a thought by its ID (PUT /api/thoughts/:ID)
-  //updateThought({})
+  //Update a thought by its ID (PUT /api/thoughts/:ID)
+  updateThought({ params, body }, res) {
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, { new: true, runValidators: true })
+      .then((dbData) => {
+        // If no Thought is found, send 404
+        if (!dbData) {
+          res.status(404).json({ message: "No Thought found with this id!" });
+          return;
+        }
+        res.json(dbData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
 
-  //TODO: Delete a thought by its ID (DELETE /api/thoughts/:ID)
+  //Delete a thought by its ID (DELETE /api/thoughts/:ID)
   deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
       .then((deletedThought) => {

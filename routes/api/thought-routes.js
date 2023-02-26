@@ -2,10 +2,10 @@ const router = require('express').Router();
 
 const {
     getAllThoughts,
-  //  getSingleThought,
+    getSingleThought,
     createThought,
     deleteThought,
-  //  updateThought,
+    updateThought,
   //  createReaction,
   //  deleteReaction,
   } = require('../../controllers/thought-controller');
@@ -20,8 +20,8 @@ router
 // Set up routes at /api/thoughts/:thoughtId
 router
   .route('/:thoughtId')
- // .get(getSingleThought)
- // .put(updateThought)
+  .get(getSingleThought)
+  .put(updateThought)
   .delete(deleteThought)
 
 // Set up routes at /api/thoughts/:thoughtId/:reactionId

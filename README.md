@@ -11,7 +11,7 @@ This repo contains all the backend code needed for a social network web applicat
 
 ## Installation
 Clone the repo to your local directory
-Once open enter the following in your CLI:
+<br>Once open enter the following in your CLI:
 <br>```npm install```
 <br>```npm start```
 

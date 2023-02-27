@@ -50,7 +50,7 @@ updateUser({ params, body }, res) {
     .catch((err) => res.status(400).json(err));
 },
 
-//TODO: Delete a user by ID (DELETE /api/users/:id)
+//Delete a user by ID (DELETE /api/users/:id)
 deleteUser({ params }, res) {
   User.findOneAndDelete({ _id: params.id })
     .then((dbData) => {
